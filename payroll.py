@@ -51,14 +51,14 @@ if uploaded_file:
     country_data = df[df['Location'] == selected_country]
     
     # Unique department list for selected country
-    department_list = country_data['Classification'].unique().tolist()
+    department_list = country_data['Organization'].unique().tolist()
     
     # Department selection within the selected country
     st.subheader("Filter by Department")
     selected_department = st.selectbox("Select a Department", department_list)
     
     # Filter by department within the selected country
-    department_data = country_data[country_data['Classification'] == selected_department]
+    department_data = country_data[country_data['Organization'] == selected_department]
     
     st.write(f"Data for {selected_department} in {selected_country}")
     st.dataframe(department_data)
@@ -77,7 +77,7 @@ if uploaded_file:
         start_col = 0
         for country in country_list:
             country_df = df[df['Location'] == country]
-            summary_table = country_df.groupby("Classification")[numeric_cols].sum().T
+            summary_table = country_df.groupby("Organization")[numeric_cols].sum().T
             summary_table["Total"] = summary_table.sum(axis=1)
             
             # Write country name above the table
