@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payroll Data Analysis & Filtering</title>
+  <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Tabulator (table UI) -->
+  <link href="https://unpkg.com/tabulator-tables@6.2.5/dist/css/tabulator.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div>
+        <h1>Payroll Data Analysis & Filtering</h1>
+      </div>
+      <div class="pill" id="statusPill">Idle</div>
+    </header>
+
+    <section class="card">
+      <div class="row">
+        <div class="col">
+          <label class="label">Upload Payroll CSV</label>
+          <input type="file" id="fileInput" accept=".csv" />
+          <div class="help">CSV encoding: auto (tries UTF-8, falls back). Columns K onward treated as numeric.</div>
+        </div>
+
+        <div class="col right">
+          <button class="btn secondary" id="resetBtn" disabled>Reset</button>
+          <button class="btn" id="exportBtn" disabled>Download Summary Excel</button>
+        </div>
+      </div>
+
+      <div class="progressWrap" id="progressWrap" hidden>
+        <div class="spinner"></div>
+        <div id="progressText">Working…</div>
+      </div>
+
+      <div class="stats" id="stats" hidden>
+        <div class="stat"><div class="statTitle">Rows</div><div class="statValue" id="statRows">-</div></div>
+        <div class="stat"><div class="statTitle">Countries</div><div class="statValue" id="statCountries">-</div></div>
+        <div class="stat"><div class="statTitle">Departments</div><div class="statValue" id="statDepts">-</div></div>
+        <div class="stat"><div class="statTitle">Numeric cols (K+)</div><div class="statValue" id="statNumCols">-</div></div>
+      </div>
+
+      <div class="error" id="errorBox" hidden></div>
+    </section>
+
+    <section class="grid">
+      <section class="card">
+        <h2>Preview (first 50 rows)</h2>
+        <div class="tableWrap">
+            <div id="previewTable"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Totals (Columns K onward)</h2>
+        <div class="toggleRow">
+          <span class="muted">View:</span>
+          <button class="btn chip active" id="totalsCardsBtn">Cards</button>
+          <button class="btn chip" id="totalsTableBtn">Table</button>
+        </div>
+        <div id="totalsCards" class="totalsCards"></div>
+        <div id="totalsTable" hidden></div>
+      </section>
+    </section>
+
+    <section class="grid">
+      <section class="card">
+        <h2>Filters</h2>
+        <div class="form">
+          <div>
+            <label class="label">Country (Location)</label>
+            <select id="countrySelect" disabled></select>
+          </div>
+          <div>
+            <label class="label">Department (Classification)</label>
+            <select id="deptSelect" disabled></select>
+          </div>
+          <div class="row">
+            <button class="btn secondary" id="applyFilterBtn" disabled>Apply</button>
+            <button class="btn ghost" id="clearFilterBtn" disabled>Clear Filters</button>
+          </div>
+          <div class="help">
+            Logic: department list depends on selected country. Totals computed on numeric cols (K+).
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Filtered Data</h2>
+        <div class="muted" id="filterTitle">No filter applied yet.</div>
+        <div class="tableWrap">
+            <div id="filteredTable"></div>
+        </div>
+
+        <h3 class="mt">Totals for Selected Department</h3>
+        <div id="deptTotalsTable"></div>
+      </section>
+    </section>
+
+    <footer class="footer muted">
+      Tip: If your payroll template shifts, we can add “Select numeric start column” without changing the logic.
+    </footer>
+  </div>
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://unpkg.com/tabulator-tables@6.2.5/dist/js/tabulator.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>

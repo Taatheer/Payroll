@@ -1,0 +1,214 @@
+:root{
+  --bg:#0b1020;
+  --card:#111a33;
+  --card2:#0f1730;
+  --text:#e9eefc;
+  --muted:#a9b3d6;
+  --accent:#4f8cff;
+  --accent2:#2fe4ab;
+  --danger:#ff5d6c;
+  --border:rgba(255,255,255,.08);
+  --shadow: 0 14px 40px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(79,140,255,.25), transparent 60%),
+              radial-gradient(900px 500px at 90% 15%, rgba(47,228,171,.18), transparent 60%),
+              var(--bg);
+  color:var(--text);
+}
+
+.app{max-width:1200px;margin:28px auto;padding:0 18px}
+
+.header{
+  display:flex;gap:16px;align-items:center;justify-content:space-between;
+  margin-bottom:18px;
+}
+.header h1{margin:0;font-size:28px;letter-spacing:.2px}
+.muted{color:var(--muted)}
+.pill{
+  padding:8px 12px;border:1px solid var(--border);
+  background:rgba(255,255,255,.04);border-radius:999px;font-weight:600;
+}
+
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:16px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:16px;
+  margin-top:16px;
+}
+@media (max-width: 960px){
+  .grid{grid-template-columns:1fr}
+}
+
+.grid > .card {
+  min-width: 0;
+}
+
+.row{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.col{flex:1}
+.right{display:flex;gap:10px;justify-content:flex-end}
+
+.label{display:block;font-weight:700;margin-bottom:6px}
+.help{margin-top:8px;color:var(--muted);font-size:13px}
+
+input[type="file"], select{
+  width:100%;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background: rgba(0,0,0,.15);
+  color: var(--text);
+  outline:none;
+}
+
+.btn{
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid rgba(79,140,255,.45);
+  background: rgba(79,140,255,.18);
+  color: var(--text);
+  cursor:pointer;
+  font-weight:700;
+}
+.btn:hover{filter:brightness(1.1)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+.btn.secondary{
+  border-color: rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+}
+.btn.ghost{
+  border-color: transparent;
+  background: transparent;
+  color: var(--muted);
+}
+
+.error{
+  margin-top:12px;
+  border:1px solid rgba(255,93,108,.55);
+  background: rgba(255,93,108,.12);
+  padding:10px 12px;
+  border-radius:12px;
+  color:#ffd0d5;
+  font-weight:600;
+}
+
+.progressWrap{
+  margin-top:12px;
+  display:flex;gap:10px;align-items:center;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background: rgba(0,0,0,.12);
+}
+
+.spinner{
+  width:16px;height:16px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.25);
+  border-top-color: var(--accent2);
+  animation: spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.stats{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:10px;
+  margin-top:12px;
+}
+@media (max-width: 960px){ .stats{grid-template-columns:repeat(2,1fr)} }
+
+.stat{
+  padding:10px 12px;border-radius:14px;
+  border:1px solid var(--border);
+  background: rgba(0,0,0,.12);
+}
+.statTitle{color:var(--muted);font-size:12px;font-weight:700}
+.statValue{font-size:18px;font-weight:900;margin-top:4px}
+
+.totalsCards{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:10px;
+}
+@media (max-width: 960px){ .totalsCards{grid-template-columns:repeat(2,1fr)} }
+
+.totalCard{
+  padding:10px 12px;border-radius:14px;
+  border:1px solid var(--border);
+  background: rgba(0,0,0,.12);
+}
+.totalKey{color:var(--muted);font-size:12px;font-weight:800}
+.totalVal{font-size:18px;font-weight:950;margin-top:6px}
+
+.toggleRow{display:flex;gap:8px;align-items:center;margin-top:8px}
+.btn.chip{
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  border:1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.05);
+}
+.btn.chip.active{
+  border-color: rgba(79,140,255,.65);
+  background: rgba(79,140,255,.20);
+}
+
+.form{display:flex;flex-direction:column;gap:12px}
+.mt{margin-top:16px}
+
+.footer{margin:18px 0 8px 0;font-size:13px}
+
+/* Prevent the whole page from horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Keep tables inside cards + allow horizontal scroll */
+.tableWrap{
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-radius: 12px;
+}
+
+.tableWrap .tabulator{
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Force tabulator to not overflow its container */
+.tableWrap .tabulator{
+  min-width: 900px;   /* adjust if you want */
+  width: 100%;
+}
+
+/* Make native dropdowns readable on dark UI */
+select, option, optgroup {
+  background-color: #0f1730 !important;
+  color: #e9eefc !important;
+}
+
+/* Helps the browser pick correct default colors for dropdown UI */
+select {
+  color-scheme: dark;
+}
+
+/* Placeholder option (first option) slightly muted */
+select option[value=""] {
+  color: #a9b3d6 !important;
+}
